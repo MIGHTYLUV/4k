@@ -143,6 +143,29 @@
       ]
     },
     {
+      "id": "ddlbase",
+      "name": "📦 DDLBase 4K/1080p",
+      "description": "DDLBase direct downloads prioritized for 4K / 2160p with 1080p fallback (Strictly NO 720p/480p)",
+      "version": "1.0.0",
+      "author": "Nuvio 4K Team",
+      "supportedTypes": [
+        "movie",
+        "tv"
+      ],
+      "filename": "providers/ddlbase.js",
+      "enabled": true,
+      "hasSettings": true,
+      "formats": [
+        "mp4",
+        "mkv"
+      ],
+      "logo": "https://i.postimg.cc/Y0gRQX4V/ddlbase.png",
+      "contentLanguage": [
+        "en",
+        "hi"
+      ]
+    },
+    {
       "id": "xdmovies",
       "name": "🎥 XDMovies 4K",
       "description": "XDMovies streaming strictly filtered for 4K / 2160p resolution",

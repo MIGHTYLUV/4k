@@ -12,6 +12,7 @@ A dedicated, curated repository of high-speed local scrapers for **Nuvio**, spec
 | **⚡ 4KHDHub-NEW 4K** | 4K (2160p) | 🏴󠁧󠁢󠁥󠁮󠁧󠁿 🇮🇳 | 4KHDHub New scraper strictly filtered for 4K resolution |
 | **🔥 HDHub4u 4K/1080p** | 4K / 1080p Fallback | 🏴󠁧󠁢󠁥󠁮󠁧󠁿 🇮🇳 | Prioritizes 4K streams; falls back to 1080p if 4K is unavailable (NO 720p) |
 | **☄️ VegaMovies 4K/1080p** | 4K / 1080p Fallback | 🏴󠁧󠁢󠁥󠁮󠁧󠁿 🇮🇳 | Prioritizes 4K streams; falls back to 1080p if 4K is unavailable (Strictly NO 720p) |
+| **📦 DDLBase 4K/1080p** | 4K / 1080p Fallback | 🏴󠁧󠁢󠁥󠁮󠁧󠁿 🇮🇳 | Direct downloads prioritized for 4K streams; falls back to 1080p (Strictly NO 720p) |
 | **🎥 XDMovies 4K** | 4K (2160p) | 🏴󠁧󠁢󠁥󠁮󠁧󠁿 🇮🇳 | XDMovies streaming strictly filtered for 4K resolution |
 | **🎞️ PSArips 4K** | 4K (2160p) | 🏴󠁧󠁢󠁥󠁮󠁧󠁿 | PSArips x265 HEVC releases strictly filtered for 4K resolution |
 | **🎬 Dahmermovies 4K** | 4K (2160p) | 🏴󠁧󠁢󠁥󠁮󠁧󠁿 | Dahmermovies streaming strictly filtered for 4K resolution |

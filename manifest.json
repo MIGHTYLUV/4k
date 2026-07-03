@@ -1,0 +1,261 @@
+{
+  "name": "4K Nuvio Scrapers",
+  "version": "1.0.0",
+  "description": "Curated repository of strictly 4K / 2160p UHD scrapers for Nuvio.",
+  "author": "Nuvio 4K Team",
+  "scrapers": [
+    {
+      "id": "olamovies",
+      "name": "👑 OlaMovies 4K",
+      "description": "Highest Quality 4K UHD & BluRay REMUX Movies and TV Series from OlaMovies",
+      "version": "1.0.0",
+      "author": "Nuvio 4K Team",
+      "supportedTypes": [
+        "movie",
+        "tv"
+      ],
+      "filename": "providers/olamovies.js",
+      "enabled": true,
+      "hasSettings": true,
+      "formats": [
+        "mp4",
+        "mkv"
+      ],
+      "logo": "https://i.postimg.cc/Z5B7RF79/4khdhub.png",
+      "contentLanguage": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "id": "uhdmovies",
+      "name": "🌟 UHDMovies 4K",
+      "description": "UHD Movies streaming strictly filtered for 4K / 2160p resolution",
+      "version": "1.0.0",
+      "author": "Nuvio 4K Team",
+      "supportedTypes": [
+        "movie",
+        "tv"
+      ],
+      "filename": "providers/uhdmovies.js",
+      "enabled": true,
+      "hasSettings": true,
+      "formats": [
+        "mp4",
+        "mkv"
+      ],
+      "logo": "https://i.postimg.cc/Z5B7RF79/4khdhub.png",
+      "contentLanguage": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "id": "4khdhub",
+      "name": "⚡ 4KHDHub 4K",
+      "description": "4KHDHub direct links strictly filtered for 4K / 2160p resolution",
+      "version": "1.0.0",
+      "author": "Nuvio 4K Team",
+      "supportedTypes": [
+        "movie",
+        "tv"
+      ],
+      "filename": "providers/4khdhub.js",
+      "enabled": true,
+      "hasSettings": true,
+      "formats": [
+        "mp4",
+        "mkv"
+      ],
+      "logo": "https://i.postimg.cc/Z5B7RF79/4khdhub.png",
+      "contentLanguage": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "id": "4khdhubnew",
+      "name": "⚡ 4KHDHub-NEW 4K",
+      "description": "4KHDHub New scraper strictly filtered for 4K / 2160p resolution",
+      "version": "1.0.0",
+      "author": "Nuvio 4K Team",
+      "supportedTypes": [
+        "movie",
+        "tv"
+      ],
+      "filename": "providers/4khdhubnew.js",
+      "enabled": true,
+      "hasSettings": true,
+      "formats": [
+        "mp4",
+        "mkv"
+      ],
+      "logo": "https://i.postimg.cc/Z5B7RF79/4khdhub.png",
+      "contentLanguage": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "id": "xdmovies",
+      "name": "🎥 XDMovies 4K",
+      "description": "XDMovies streaming strictly filtered for 4K / 2160p resolution",
+      "version": "1.0.0",
+      "author": "Nuvio 4K Team",
+      "supportedTypes": [
+        "movie",
+        "tv"
+      ],
+      "filename": "providers/xdmovies.js",
+      "enabled": true,
+      "hasSettings": true,
+      "formats": [
+        "mp4",
+        "mkv"
+      ],
+      "logo": "https://i.postimg.cc/Z5B7RF79/4khdhub.png",
+      "contentLanguage": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "id": "psa",
+      "name": "🎞️ PSArips 4K",
+      "description": "PSArips x265 HEVC strictly filtered for 4K / 2160p resolution",
+      "version": "1.0.0",
+      "author": "Nuvio 4K Team",
+      "supportedTypes": [
+        "movie",
+        "tv"
+      ],
+      "filename": "providers/psa.js",
+      "enabled": true,
+      "hasSettings": true,
+      "formats": [
+        "mp4",
+        "mkv"
+      ],
+      "logo": "https://i.postimg.cc/Z5B7RF79/4khdhub.png",
+      "contentLanguage": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "id": "dahmermovies-4k",
+      "name": "🎬 Dahmermovies 4K",
+      "description": "Dahmermovies streaming strictly filtered for 4K / 2160p resolution",
+      "version": "1.0.0",
+      "author": "Nuvio 4K Team",
+      "supportedTypes": [
+        "movie",
+        "tv"
+      ],
+      "filename": "providers/dahmermovies-4k.js",
+      "enabled": true,
+      "hasSettings": true,
+      "formats": [
+        "mp4",
+        "mkv"
+      ],
+      "logo": "https://i.postimg.cc/Z5B7RF79/4khdhub.png",
+      "contentLanguage": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "id": "moviesdrive",
+      "name": "🚀 MoviesDrive 4K",
+      "description": "MoviesDrive streaming strictly filtered for 4K / 2160p resolution",
+      "version": "1.0.0",
+      "author": "Nuvio 4K Team",
+      "supportedTypes": [
+        "movie",
+        "tv"
+      ],
+      "filename": "providers/moviesdrive.js",
+      "enabled": true,
+      "hasSettings": true,
+      "formats": [
+        "mp4",
+        "mkv"
+      ],
+      "logo": "https://i.postimg.cc/Z5B7RF79/4khdhub.png",
+      "contentLanguage": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "id": "hindmoviez",
+      "name": "💎 HindMoviez 4K",
+      "description": "HindMoviez streaming strictly filtered for 4K / 2160p resolution",
+      "version": "1.0.0",
+      "author": "Nuvio 4K Team",
+      "supportedTypes": [
+        "movie",
+        "tv"
+      ],
+      "filename": "providers/hindmoviez.js",
+      "enabled": true,
+      "hasSettings": true,
+      "formats": [
+        "mp4",
+        "mkv"
+      ],
+      "logo": "https://i.postimg.cc/Z5B7RF79/4khdhub.png",
+      "contentLanguage": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "id": "cineby",
+      "name": "🎥 Cineby 4K",
+      "description": "Cineby streaming strictly filtered for 4K / 2160p resolution",
+      "version": "1.0.0",
+      "author": "Nuvio 4K Team",
+      "supportedTypes": [
+        "movie",
+        "tv"
+      ],
+      "filename": "providers/cineby.js",
+      "enabled": true,
+      "hasSettings": true,
+      "formats": [
+        "mp4",
+        "mkv"
+      ],
+      "logo": "https://i.postimg.cc/Z5B7RF79/4khdhub.png",
+      "contentLanguage": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "id": "nakios",
+      "name": "🇫🇷 Nakios 4K",
+      "description": "French & English streaming strictly filtered for 4K / 2160p resolution",
+      "version": "1.0.0",
+      "author": "Nuvio 4K Team",
+      "supportedTypes": [
+        "movie",
+        "tv"
+      ],
+      "filename": "providers/nakios.js",
+      "enabled": true,
+      "hasSettings": true,
+      "formats": [
+        "mp4",
+        "mkv"
+      ],
+      "logo": "https://i.postimg.cc/Z5B7RF79/4khdhub.png",
+      "contentLanguage": [
+        "en",
+        "hi"
+      ]
+    }
+  ]
+}

@@ -8,7 +8,7 @@ if (typeof getStreams === 'function') {
       const results = await __origGetStreams(...args);
       if (!Array.isArray(results)) return [];
       return results.filter(s => {
-        const q = (s.quality || '').toUpperCase();
+        const q = (s.quality || '').toString().toUpperCase();
         const str = ((s.name || '') + ' ' + (s.title || '') + ' ' + (s.qualityTag || '')).toUpperCase();
         const is2160 = q === '4K' || q === '2160P' || str.includes('2160P') || /\b(4K\s*UHD|UHD\s*4K|2160)\b/.test(str);
         const isLower = /\b(1080P|720P|480P)\b/.test(str);

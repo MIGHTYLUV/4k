@@ -1,7 +1,7 @@
 {
   "name": "4K Nuvio Scrapers",
   "version": "1.0.0",
-  "description": "Curated repository of strictly 4K / 2160p UHD scrapers for Nuvio.",
+  "description": "Curated repository of strictly 4K / 2160p UHD scrapers for Nuvio with intelligent 1080p fallback.",
   "author": "Nuvio 4K Team",
   "scrapers": [
     {
@@ -91,6 +91,52 @@
         "mkv"
       ],
       "logo": "https://i.postimg.cc/Z5B7RF79/4khdhub.png",
+      "contentLanguage": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "id": "hdhub4u",
+      "name": "🔥 HDHub4u 4K/1080p",
+      "description": "HDHub4u streaming prioritized for 4K / 2160p with intelligent 1080p fallback",
+      "version": "1.0.0",
+      "author": "Nuvio 4K Team",
+      "supportedTypes": [
+        "movie",
+        "tv"
+      ],
+      "filename": "providers/hdhub4u.js",
+      "enabled": true,
+      "hasSettings": true,
+      "formats": [
+        "mp4",
+        "mkv"
+      ],
+      "logo": "https://i.postimg.cc/Z5B7RF79/4khdhub.png",
+      "contentLanguage": [
+        "en",
+        "hi"
+      ]
+    },
+    {
+      "id": "vegamovies",
+      "name": "☄️ VegaMovies 4K/1080p",
+      "description": "VegaMovies streaming prioritized for 4K / 2160p with 1080p fallback (Strictly NO 720p/480p)",
+      "version": "1.0.0",
+      "author": "Nuvio 4K Team",
+      "supportedTypes": [
+        "movie",
+        "tv"
+      ],
+      "filename": "providers/vegamovies.js",
+      "enabled": true,
+      "hasSettings": true,
+      "formats": [
+        "mp4",
+        "mkv"
+      ],
+      "logo": "https://i.postimg.cc/13ZtY5x0/vegamovies.png",
       "contentLanguage": [
         "en",
         "hi"

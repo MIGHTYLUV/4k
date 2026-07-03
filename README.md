@@ -1,6 +1,6 @@
 # 4K-Nuvio Scrapers 🌟
 
-A dedicated, curated repository of high-speed local scrapers for **Nuvio**, specifically filtered to return **ONLY 4K (2160p / UHD)** streaming links.
+A dedicated, curated repository of high-speed local scrapers for **Nuvio**, specifically filtered to return **ONLY 4K (2160p / UHD)** streaming links with intelligent 1080p fallback.
 
 ## Available 4K Scrapers
 
@@ -10,6 +10,8 @@ A dedicated, curated repository of high-speed local scrapers for **Nuvio**, spec
 | **🌟 UHDMovies 4K** | 4K (2160p) | 🏴󠁧󠁢󠁥󠁮󠁧󠁿 🇮🇳 | UHD Movies streaming strictly filtered for 4K resolution |
 | **⚡ 4KHDHub 4K** | 4K (2160p) | 🏴󠁧󠁢󠁥󠁮󠁧󠁿 🇮🇳 | 4KHDHub direct links strictly filtered for 4K resolution |
 | **⚡ 4KHDHub-NEW 4K** | 4K (2160p) | 🏴󠁧󠁢󠁥󠁮󠁧󠁿 🇮🇳 | 4KHDHub New scraper strictly filtered for 4K resolution |
+| **🔥 HDHub4u 4K/1080p** | 4K / 1080p Fallback | 🏴󠁧󠁢󠁥󠁮󠁧󠁿 🇮🇳 | Prioritizes 4K streams; falls back to 1080p if 4K is unavailable (NO 720p) |
+| **☄️ VegaMovies 4K/1080p** | 4K / 1080p Fallback | 🏴󠁧󠁢󠁥󠁮󠁧󠁿 🇮🇳 | Prioritizes 4K streams; falls back to 1080p if 4K is unavailable (Strictly NO 720p) |
 | **🎥 XDMovies 4K** | 4K (2160p) | 🏴󠁧󠁢󠁥󠁮󠁧󠁿 🇮🇳 | XDMovies streaming strictly filtered for 4K resolution |
 | **🎞️ PSArips 4K** | 4K (2160p) | 🏴󠁧󠁢󠁥󠁮󠁧󠁿 | PSArips x265 HEVC releases strictly filtered for 4K resolution |
 | **🎬 Dahmermovies 4K** | 4K (2160p) | 🏴󠁧󠁢󠁥󠁮󠁧󠁿 | Dahmermovies streaming strictly filtered for 4K resolution |
@@ -26,4 +28,4 @@ A dedicated, curated repository of high-speed local scrapers for **Nuvio**, spec
 ```text
 https://raw.githubusercontent.com/<YOUR_GITHUB_USERNAME>/<YOUR_REPO_NAME>/main/manifest.json
 ```
-4. Enable the scrapers and enjoy strictly 4K streaming!
+4. Enable the scrapers and enjoy strictly 4K & premium 1080p streaming!

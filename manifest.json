@@ -1,15 +1,15 @@
 {
-  "name": "4K Nuvio Scrapers",
+  "name": "4K & 1080p Nuvio Scrapers",
   "version": "1.0.0",
-  "description": "Curated repository of strictly 4K / 2160p UHD scrapers for Nuvio with intelligent 1080p fallback.",
-  "author": "Nuvio 4K Team",
+  "description": "Curated repository of strictly 4K (2160p) and 1080p UHD/BluRay scrapers for Nuvio. Zero 720p or SD streams.",
+  "author": "Nuvio 4K & 1080p Team",
   "scrapers": [
     {
       "id": "olamovies",
-      "name": "👑 OlaMovies 4K",
-      "description": "Highest Quality 4K UHD & BluRay REMUX Movies and TV Series from OlaMovies",
+      "name": "👑 OlaMovies 4K & 1080p",
+      "description": "Highest Quality 4K UHD & 1080p BluRay REMUX Movies and TV Series from OlaMovies",
       "version": "1.0.0",
-      "author": "Nuvio 4K Team",
+      "author": "Nuvio 4K & 1080p Team",
       "supportedTypes": [
         "movie",
         "tv"
@@ -29,10 +29,10 @@
     },
     {
       "id": "uhdmovies",
-      "name": "🌟 UHDMovies 4K",
-      "description": "UHD Movies streaming strictly filtered for 4K / 2160p resolution",
+      "name": "🌟 UHDMovies 4K & 1080p",
+      "description": "UHD Movies streaming filtered for 4K & 1080p resolution (NO 720p)",
       "version": "1.0.0",
-      "author": "Nuvio 4K Team",
+      "author": "Nuvio 4K & 1080p Team",
       "supportedTypes": [
         "movie",
         "tv"
@@ -52,10 +52,10 @@
     },
     {
       "id": "4khdhub",
-      "name": "⚡ 4KHDHub 4K",
-      "description": "4KHDHub direct links strictly filtered for 4K / 2160p resolution",
+      "name": "⚡ 4KHDHub 4K & 1080p",
+      "description": "4KHDHub direct links filtered for 4K & 1080p resolution (NO 720p)",
       "version": "1.0.0",
-      "author": "Nuvio 4K Team",
+      "author": "Nuvio 4K & 1080p Team",
       "supportedTypes": [
         "movie",
         "tv"
@@ -75,10 +75,10 @@
     },
     {
       "id": "4khdhubnew",
-      "name": "⚡ 4KHDHub-NEW 4K",
-      "description": "4KHDHub New scraper strictly filtered for 4K / 2160p resolution",
+      "name": "⚡ 4KHDHub-NEW 4K & 1080p",
+      "description": "4KHDHub New scraper filtered for 4K & 1080p resolution (NO 720p)",
       "version": "1.0.0",
-      "author": "Nuvio 4K Team",
+      "author": "Nuvio 4K & 1080p Team",
       "supportedTypes": [
         "movie",
         "tv"
@@ -98,10 +98,10 @@
     },
     {
       "id": "hdhub4u",
-      "name": "🔥 HDHub4u 4K/1080p",
-      "description": "HDHub4u streaming prioritized for 4K / 2160p with intelligent 1080p fallback",
+      "name": "🔥 HDHub4u 4K & 1080p",
+      "description": "HDHub4u streaming filtered for 4K & 1080p resolution (NO 720p)",
       "version": "1.0.0",
-      "author": "Nuvio 4K Team",
+      "author": "Nuvio 4K & 1080p Team",
       "supportedTypes": [
         "movie",
         "tv"
@@ -121,10 +121,10 @@
     },
     {
       "id": "vegamovies",
-      "name": "☄️ VegaMovies 4K/1080p",
-      "description": "VegaMovies streaming prioritized for 4K / 2160p with 1080p fallback (Strictly NO 720p/480p)",
+      "name": "☄️ VegaMovies 4K & 1080p",
+      "description": "VegaMovies streaming filtered for 4K & 1080p resolution (Strictly NO 720p/480p)",
       "version": "1.0.0",
-      "author": "Nuvio 4K Team",
+      "author": "Nuvio 4K & 1080p Team",
       "supportedTypes": [
         "movie",
         "tv"
@@ -144,10 +144,10 @@
     },
     {
       "id": "ddlbase",
-      "name": "📦 DDLBase 4K/1080p",
-      "description": "DDLBase direct downloads prioritized for 4K / 2160p with 1080p fallback (Strictly NO 720p/480p)",
+      "name": "📦 DDLBase 4K & 1080p",
+      "description": "DDLBase direct downloads filtered for 4K & 1080p resolution (Strictly NO 720p/480p)",
       "version": "1.0.0",
-      "author": "Nuvio 4K Team",
+      "author": "Nuvio 4K & 1080p Team",
       "supportedTypes": [
         "movie",
         "tv"
@@ -167,10 +167,10 @@
     },
     {
       "id": "xdmovies",
-      "name": "🎥 XDMovies 4K",
-      "description": "XDMovies streaming strictly filtered for 4K / 2160p resolution",
+      "name": "🎥 XDMovies 4K & 1080p",
+      "description": "XDMovies streaming filtered for 4K & 1080p resolution (NO 720p)",
       "version": "1.0.0",
-      "author": "Nuvio 4K Team",
+      "author": "Nuvio 4K & 1080p Team",
       "supportedTypes": [
         "movie",
         "tv"
@@ -190,10 +190,10 @@
     },
     {
       "id": "psa",
-      "name": "🎞️ PSArips 4K",
-      "description": "PSArips x265 HEVC strictly filtered for 4K / 2160p resolution",
+      "name": "🎞️ PSArips 4K & 1080p",
+      "description": "PSArips x265 HEVC releases filtered for 4K & 1080p resolution (NO 720p)",
       "version": "1.0.0",
-      "author": "Nuvio 4K Team",
+      "author": "Nuvio 4K & 1080p Team",
       "supportedTypes": [
         "movie",
         "tv"
@@ -213,10 +213,10 @@
     },
     {
       "id": "dahmermovies-4k",
-      "name": "🎬 Dahmermovies 4K",
-      "description": "Dahmermovies streaming strictly filtered for 4K / 2160p resolution",
+      "name": "🎬 Dahmermovies 4K & 1080p",
+      "description": "Dahmermovies streaming filtered for 4K & 1080p resolution (NO 720p)",
       "version": "1.0.0",
-      "author": "Nuvio 4K Team",
+      "author": "Nuvio 4K & 1080p Team",
       "supportedTypes": [
         "movie",
         "tv"
@@ -236,10 +236,10 @@
     },
     {
       "id": "moviesdrive",
-      "name": "🚀 MoviesDrive 4K",
-      "description": "MoviesDrive streaming strictly filtered for 4K / 2160p resolution",
+      "name": "🚀 MoviesDrive 4K & 1080p",
+      "description": "MoviesDrive streaming filtered for 4K & 1080p resolution (NO 720p)",
       "version": "1.0.0",
-      "author": "Nuvio 4K Team",
+      "author": "Nuvio 4K & 1080p Team",
       "supportedTypes": [
         "movie",
         "tv"
@@ -259,10 +259,10 @@
     },
     {
       "id": "hindmoviez",
-      "name": "💎 HindMoviez 4K",
-      "description": "HindMoviez streaming strictly filtered for 4K / 2160p resolution",
+      "name": "💎 HindMoviez 4K & 1080p",
+      "description": "HindMoviez streaming filtered for 4K & 1080p resolution (NO 720p)",
       "version": "1.0.0",
-      "author": "Nuvio 4K Team",
+      "author": "Nuvio 4K & 1080p Team",
       "supportedTypes": [
         "movie",
         "tv"
@@ -282,10 +282,10 @@
     },
     {
       "id": "cineby",
-      "name": "🎥 Cineby 4K",
-      "description": "Cineby streaming strictly filtered for 4K / 2160p resolution",
+      "name": "🎥 Cineby 4K & 1080p",
+      "description": "Cineby streaming filtered for 4K & 1080p resolution (NO 720p)",
       "version": "1.0.0",
-      "author": "Nuvio 4K Team",
+      "author": "Nuvio 4K & 1080p Team",
       "supportedTypes": [
         "movie",
         "tv"
@@ -305,10 +305,10 @@
     },
     {
       "id": "nakios",
-      "name": "🇫🇷 Nakios 4K",
-      "description": "French & English streaming strictly filtered for 4K / 2160p resolution",
+      "name": "🇫🇷 Nakios 4K & 1080p",
+      "description": "French & English streaming filtered for 4K & 1080p resolution (NO 720p)",
       "version": "1.0.0",
-      "author": "Nuvio 4K Team",
+      "author": "Nuvio 4K & 1080p Team",
       "supportedTypes": [
         "movie",
         "tv"

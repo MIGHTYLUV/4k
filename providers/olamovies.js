@@ -184,3 +184,34 @@ if (typeof module !== 'undefined' && module.exports) {
 } else {
   global.getStreams = getStreams;
 }
+
+// --- 4K & 1080P ALWAYS ENABLED WRAPPER (STRICTLY NO 720P/480P) ---
+if (typeof getStreams === 'function') {
+  const __origGetStreams = getStreams;
+  getStreams = async function(...args) {
+    try {
+      const results = await __origGetStreams(...args);
+      if (!Array.isArray(results)) return [];
+      
+      return results.filter(s => {
+        const q = (s.quality || '').toString().toUpperCase();
+        const str = ((s.name || '') + ' ' + (s.title || '') + ' ' + (s.qualityTag || '')).toUpperCase();
+        
+        // Strictly eliminate 720p, 480p, SD, or lower resolutions
+        if (q === '720P' || q === '480P' || /\b(720P|480P|360P|240P)\b/.test(str)) {
+          return false;
+        }
+        
+        // Keep 4K (2160p) and 1080p streams always
+        const is2160 = q === '4K' || q === '2160P' || str.includes('2160P') || /\b(4K|2160)\b/.test(str);
+        const is1080 = q === '1080P' || str.includes('1080P') || /\b1080\b/.test(str);
+        
+        return is2160 || is1080;
+      });
+    } catch (e) {
+      return [];
+    }
+  };
+  if (typeof module !== 'undefined' && module.exports) module.exports = { getStreams };
+  if (typeof global !== 'undefined') global.getStreams = getStreams;
+}

@@ -186,7 +186,7 @@ if (typeof module !== 'undefined' && module.exports) {
   module.exports = { getStreams };
 }
 
-// --- 4K WITH 1080P FALLBACK WRAPPER (NO 720P AT ANY COST) ---
+// --- 4K & 1080P ALWAYS ENABLED WRAPPER (STRICTLY NO 720P/480P) ---
 if (typeof getStreams === 'function') {
   const __origGetStreams = getStreams;
   getStreams = async function(...args) {
@@ -194,26 +194,21 @@ if (typeof getStreams === 'function') {
       const results = await __origGetStreams(...args);
       if (!Array.isArray(results)) return [];
       
-      // First, filter for 4K (2160p) streams
-      const streams4K = results.filter(s => {
+      return results.filter(s => {
         const q = (s.quality || '').toString().toUpperCase();
         const str = ((s.name || '') + ' ' + (s.title || '') + ' ' + (s.qualityTag || '')).toUpperCase();
-        return q === '4K' || q === '2160P' || str.includes('2160P') || /\b(4K|2160)\b/.test(str);
+        
+        // Strictly eliminate 720p, 480p, SD, or lower resolutions
+        if (q === '720P' || q === '480P' || /\b(720P|480P|360P|240P)\b/.test(str)) {
+          return false;
+        }
+        
+        // Keep 4K (2160p) and 1080p streams always
+        const is2160 = q === '4K' || q === '2160P' || str.includes('2160P') || /\b(4K|2160)\b/.test(str);
+        const is1080 = q === '1080P' || str.includes('1080P') || /\b1080\b/.test(str);
+        
+        return is2160 || is1080;
       });
-      
-      // If 4K streams exist, return ONLY 4K streams
-      if (streams4K.length > 0) {
-        return streams4K;
-      }
-      
-      // If 4K stream is not available, fall back to 1080p streams strictly (never 720p/480p)
-      const streams1080p = results.filter(s => {
-        const q = (s.quality || '').toString().toUpperCase();
-        const str = ((s.name || '') + ' ' + (s.title || '') + ' ' + (s.qualityTag || '')).toUpperCase();
-        return q === '1080P' || str.includes('1080P') || /\b1080\b/.test(str);
-      });
-      
-      return streams1080p;
     } catch (e) {
       return [];
     }

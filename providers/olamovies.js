@@ -185,7 +185,7 @@ if (typeof module !== 'undefined' && module.exports) {
   global.getStreams = getStreams;
 }
 
-// --- 4K & 1080P ALWAYS ENABLED WRAPPER (STRICTLY NO 720P/480P) ---
+// --- 4K & 1080P NORMALIZED WRAPPER WITH EXOPLAYER HEADERS ---
 if (typeof getStreams === 'function') {
   const __origGetStreams = getStreams;
   getStreams = async function(...args) {
@@ -193,21 +193,36 @@ if (typeof getStreams === 'function') {
       const results = await __origGetStreams(...args);
       if (!Array.isArray(results)) return [];
       
-      return results.filter(s => {
-        const q = (s.quality || '').toString().toUpperCase();
+      const cleaned = results.map(s => {
+        let q = (s.quality || '').toString().toUpperCase();
         const str = ((s.name || '') + ' ' + (s.title || '') + ' ' + (s.qualityTag || '')).toUpperCase();
         
-        // Strictly eliminate 720p, 480p, SD, or lower resolutions
-        if (q === '720P' || q === '480P' || /\b(720P|480P|360P|240P)\b/.test(str)) {
-          return false;
-        }
-        
-        // Keep 4K (2160p) and 1080p streams always
         const is2160 = q === '4K' || q === '2160P' || str.includes('2160P') || /\b(4K|2160)\b/.test(str);
         const is1080 = q === '1080P' || str.includes('1080P') || /\b1080\b/.test(str);
         
-        return is2160 || is1080;
+        if (is2160) q = '4K';
+        else if (is1080) q = '1080p';
+        else q = 'Unknown';
+        
+        const reqHeaders = (s.behaviorHints && s.behaviorHints.proxyHeaders && s.behaviorHints.proxyHeaders.request) ? s.behaviorHints.proxyHeaders.request : (s.headers || {});
+        const finalHeaders = { 'User-Agent': 'Mozilla/5.0 (Android) ExoPlayer', 'Range': 'bytes=0-', ...reqHeaders };
+        
+        let sizeStr = (s.size || '').toString();
+        const sizeMatch = sizeStr.match(/(\d+(?:\.\d+)?\s*(?:GB|MB))/i);
+        if (sizeMatch) sizeStr = sizeMatch[1];
+        
+        return {
+          name: s.name || 'OlaMovies',
+          title: (s.title || '').split('\n')[0] || 'OlaMovies Stream',
+          url: s.url,
+          quality: q,
+          size: sizeStr,
+          headers: finalHeaders,
+          provider: 'olamovies'
+        };
       });
+      
+      return cleaned.filter(s => s.quality === '4K');
     } catch (e) {
       return [];
     }

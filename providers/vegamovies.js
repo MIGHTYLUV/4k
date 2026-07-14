@@ -269,7 +269,8 @@ function makeStream(titleText, qualityTag, streamUrl, quality, refererHeader, po
   const q = quality || parseQuality(qualityTag || cleanTitle) || '1080p';
   const headers = {
     'User-Agent': getMobileHeaders()['User-Agent'],
-    'Referer': refererHeader || baseUrl + '/'
+    'Referer': refererHeader || baseUrl + '/',
+    'Range': 'bytes=0-'
   };
 
   return {
@@ -338,7 +339,7 @@ async function extractFilepress(url, quality, referer, titleTag, postTitle, targ
               }
             }
           }
-          return [makeStream(titleTag || 'Filepress Direct Stream', qualityTag || quality, streamUrl, quality, origin + '/', postTitle)];
+          return [makeStream(titleTag || 'Filepress Direct Stream', quality, streamUrl, quality, origin + '/', postTitle)];
         }
       }
     }
@@ -564,36 +565,48 @@ async function getStreams(id, type = 'movie', season = null, episode = null) {
   }
 }
 
-// --- 4K & 1080P ALWAYS ENABLED WRAPPER (STRICTLY NO 720P/480P) ---
+// --- 4K & 1080P NORMALIZED WRAPPER WITH EXOPLAYER HEADERS ---
 if (typeof getStreams === 'function') {
   const __origGetStreams = getStreams;
   getStreams = async function(...args) {
     try {
       const results = await __origGetStreams(...args);
       if (!Array.isArray(results)) return [];
-
-      return results.filter(s => {
-        const q = (s.quality || '').toString().toUpperCase();
+      
+      const cleaned = results.map(s => {
+        let q = (s.quality || '').toString().toUpperCase();
         const str = ((s.name || '') + ' ' + (s.title || '') + ' ' + (s.qualityTag || '')).toUpperCase();
-
-        if (q === '720P' || q === '480P' || /\b(720P|480P|360P|240P)\b/.test(str)) {
-          return false;
-        }
-
+        
         const is2160 = q === '4K' || q === '2160P' || str.includes('2160P') || /\b(4K|2160)\b/.test(str);
         const is1080 = q === '1080P' || str.includes('1080P') || /\b1080\b/.test(str);
-
-        return is2160 || is1080;
+        
+        if (is2160) q = '4K';
+        else if (is1080) q = '1080p';
+        else q = 'Unknown';
+        
+        const reqHeaders = (s.behaviorHints && s.behaviorHints.proxyHeaders && s.behaviorHints.proxyHeaders.request) ? s.behaviorHints.proxyHeaders.request : (s.headers || {});
+        const finalHeaders = { 'User-Agent': 'Mozilla/5.0 (Android) ExoPlayer', 'Range': 'bytes=0-', ...reqHeaders };
+        
+        let sizeStr = (s.size || '').toString();
+        const sizeMatch = sizeStr.match(/(\d+(?:\.\d+)?\s*(?:GB|MB))/i);
+        if (sizeMatch) sizeStr = sizeMatch[1];
+        
+        return {
+          name: s.name || 'VegaMovies',
+          title: (s.title || '').split('\n')[0] || 'VegaMovies Stream',
+          url: s.url,
+          quality: q,
+          size: sizeStr,
+          headers: finalHeaders,
+          provider: 'vegamovies'
+        };
       });
+      
+      return cleaned.filter(s => s.quality === '4K');
     } catch (e) {
       return [];
     }
   };
-}
-
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { getStreams };
-}
-if (typeof global !== 'undefined') {
-  global.getStreams = getStreams;
+  if (typeof module !== 'undefined' && module.exports) module.exports = { getStreams };
+  if (typeof global !== 'undefined') global.getStreams = getStreams;
 }

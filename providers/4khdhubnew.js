@@ -36,7 +36,7 @@ if (typeof getStreams === 'function') {
         };
       });
       
-      return cleaned.filter(s => s.quality === '4K' || s.quality === '1080p');
+      return cleaned.filter(s => s.quality === '4K');
     } catch (e) {
       return [];
     }

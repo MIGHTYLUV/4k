@@ -185,7 +185,7 @@ if (typeof module !== 'undefined' && module.exports) {
   global.getStreams = getStreams;
 }
 
-// --- 4K & 1080P NORMALIZED WRAPPER WITH EXOPLAYER HEADERS ---
+// --- AIOSTREAMS RICH CARD 4K-ONLY WRAPPER WITH EXOPLAYER HEADERS ---
 if (typeof getStreams === 'function') {
   const __origGetStreams = getStreams;
   getStreams = async function(...args) {
@@ -195,34 +195,58 @@ if (typeof getStreams === 'function') {
       
       const cleaned = results.map(s => {
         let q = (s.quality || '').toString().toUpperCase();
-        const str = ((s.name || '') + ' ' + (s.title || '') + ' ' + (s.qualityTag || '')).toUpperCase();
+        const rawText = ((s.name || '') + ' ' + (s.title || '') + ' ' + (s.qualityTag || '') + ' ' + (s.url || '')).toUpperCase();
         
-        const is2160 = q === '4K' || q === '2160P' || str.includes('2160P') || /\b(4K|2160)\b/.test(str);
-        const is1080 = q === '1080P' || str.includes('1080P') || /\b1080\b/.test(str);
-        
-        if (is2160) q = '4K';
-        else if (is1080) q = '1080p';
-        else q = 'Unknown';
+        const is2160 = q === '4K' || q === '2160P' || rawText.includes('2160P') || /\b(4K|2160)\b/.test(rawText);
+        if (!is2160) return null;
         
         const reqHeaders = (s.behaviorHints && s.behaviorHints.proxyHeaders && s.behaviorHints.proxyHeaders.request) ? s.behaviorHints.proxyHeaders.request : (s.headers || {});
         const finalHeaders = { 'User-Agent': 'Mozilla/5.0 (Android) ExoPlayer', 'Range': 'bytes=0-', ...reqHeaders };
         
         let sizeStr = (s.size || '').toString();
-        const sizeMatch = sizeStr.match(/(\d+(?:\.\d+)?\s*(?:GB|MB))/i);
+        const sizeMatch = rawText.match(/(\d+(?:\.\d+)?\s*(?:GB|MB))/i) || sizeStr.match(/(\d+(?:\.\d+)?\s*(?:GB|MB))/i);
         if (sizeMatch) sizeStr = sizeMatch[1];
+        else sizeStr = sizeStr || '4K UHD';
+        
+        let badge = '4K (WEB)\n⟨Remux⟩';
+        if (rawText.includes('BLURAY')) badge = '4K (BluRay)\n⟨Remux⟩';
+        else if (rawText.includes('HDRIP') || rawText.includes('WEB')) badge = '4K (WEB)\n★★★★★';
+        
+        let videoSpecs = [];
+        if (rawText.includes('HEVC') || rawText.includes('X265')) videoSpecs.push('HEVC');
+        if (rawText.includes('10BIT')) videoSpecs.push('10bit');
+        if (rawText.includes('DV') || rawText.includes('DOLBY VISION')) videoSpecs.push('DV');
+        if (rawText.includes('HDR')) videoSpecs.push('HDR');
+        if (videoSpecs.length === 0) videoSpecs = ['HEVC', '10bit', 'HDR'];
+        
+        let audioSpecs = [];
+        if (rawText.includes('ATMOS')) audioSpecs.push('Atmos');
+        if (rawText.includes('DD+') || rawText.includes('DDP')) audioSpecs.push('DD+');
+        if (rawText.includes('TRUEHD')) audioSpecs.push('TrueHD');
+        if (rawText.includes('DTS')) audioSpecs.push('DTS-HD');
+        if (rawText.includes('7.1')) audioSpecs.push('🔊 7.1');
+        else if (rawText.includes('5.1')) audioSpecs.push('🔊 5.1');
+        else audioSpecs.push('🔊 2.0');
+        if (audioSpecs.length === 1) audioSpecs.unshift('Dual Audio');
+        
+        let langStr = 'HI · EN';
+        if (rawText.includes('MULTI')) langStr = 'MULTI';
+        
+        let cleanTitle = (s.title || '').split('\n')[0].replace(/^🎬\s*/, '').replace(/\s*\n.*$/, '').trim() || (s.name || 'Stream');
+        const formattedTitle = '✏  ' + cleanTitle + '\n⏹  ' + videoSpecs.join(' ✦ ') + '\n🎵  ' + audioSpecs.join(' · ') + '\n◈  ' + sizeStr + '\n🛡  Nuvio · OlaMovies\n🏴  ' + langStr;
         
         return {
-          name: s.name || 'OlaMovies',
-          title: (s.title || '').split('\n')[0] || 'OlaMovies Stream',
+          name: badge,
+          title: formattedTitle,
           url: s.url,
-          quality: q,
+          quality: '4K',
           size: sizeStr,
           headers: finalHeaders,
           provider: 'olamovies'
         };
-      });
+      }).filter(s => s !== null && s.quality === '4K');
       
-      return cleaned.filter(s => s.quality === '4K');
+      return cleaned;
     } catch (e) {
       return [];
     }

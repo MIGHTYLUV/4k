@@ -107,7 +107,7 @@
         "tv"
       ],
       "filename": "providers/hdhub4u.js",
-      "enabled": true,
+      "enabled": false,
       "hasSettings": true,
       "formats": [
         "mp4",

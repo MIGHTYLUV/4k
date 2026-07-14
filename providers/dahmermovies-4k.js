@@ -1,5 +1,5 @@
 const _0x2d04b7=_0x496e;(function(_0x5076a3,_0x39fd72){const _0x12f68b=_0x496e,_0x39212e=_0x5076a3();while(!![]){try{const _0x403b05=-parseInt(_0x12f68b(0x176))/0x1+-parseInt(_0x12f68b(0x159))/0x2+parseInt(_0x12f68b(0x151))/0x3*(-parseInt(_0x12f68b(0x164))/0x4)+-parseInt(_0x12f68b(0x148))/0x5+parseInt(_0x12f68b(0x145))/0x6*(-parseInt(_0x12f68b(0x144))/0x7)+parseInt(_0x12f68b(0x177))/0x8+parseInt(_0x12f68b(0x170))/0x9;if(_0x403b05===_0x39fd72)break;else _0x39212e['push'](_0x39212e['shift']());}catch(_0x555243){_0x39212e['push'](_0x39212e['shift']());}}}(_0x39aa,0x286b8));var __async=(_0x3b000f,_0x6b952b,_0x285023)=>{return new Promise((_0x4983ee,_0xc561fb)=>{const _0x387399=_0x496e;var _0x51942c=_0x6d4c8c=>{const _0x4b04c8=_0x496e;try{_0x2ad414(_0x285023[_0x4b04c8(0x16f)](_0x6d4c8c));}catch(_0x203eba){_0xc561fb(_0x203eba);}},_0x18eb73=_0x383366=>{const _0x59aa14=_0x496e;try{_0x2ad414(_0x285023[_0x59aa14(0x158)](_0x383366));}catch(_0xe29812){_0xc561fb(_0xe29812);}},_0x2ad414=_0x291a99=>_0x291a99[_0x387399(0x14a)]?_0x4983ee(_0x291a99[_0x387399(0x153)]):Promise['resolve'](_0x291a99['value'])[_0x387399(0x15b)](_0x51942c,_0x18eb73);_0x2ad414((_0x285023=_0x285023[_0x387399(0x171)](_0x3b000f,_0x6b952b))[_0x387399(0x16f)]());});};console[_0x2d04b7(0x14d)](_0x2d04b7(0x15d));var TMDB_API_KEY=_0x2d04b7(0x14e),DAHMER_MOVIES_API=_0x2d04b7(0x165);function makeRequest(_0x30119a){return __async(this,null,function*(){const _0xa81022=_0x496e;try{return yield fetch(_0x30119a,{'headers':{'User-Agent':_0xa81022(0x163)}});}catch(_0x3c2474){return{'ok':![]};}});}function resolveFinalUrl(_0x627e34){return __async(this,null,function*(){const _0x6078ab=_0x496e;let _0x3fb108=_0x627e34;_0x627e34[_0x6078ab(0x149)](_0x6078ab(0x154))&&(_0x3fb108=decodeURIComponent(_0x627e34[_0x6078ab(0x16e)]('u=')[0x1]));try{const _0x3bf089=yield fetch(_0x3fb108,{'method':_0x6078ab(0x14c),'redirect':_0x6078ab(0x15e),'headers':{'User-Agent':_0x6078ab(0x174),'Referer':DAHMER_MOVIES_API+'/'}});return _0x3bf089[_0x6078ab(0x15c)];}catch(_0xb659b3){return _0x3fb108;}});}function parseLinks(_0x26f757){const _0x19ef35=_0x2d04b7,_0x5eb3f4=[],_0x51fc2a=new RegExp(_0x19ef35(0x152),'gis');let _0x169d05;while((_0x169d05=_0x51fc2a[_0x19ef35(0x16a)](_0x26f757))!==null){const _0x39826c=_0x169d05[0x1],_0x51945a=_0x39826c[_0x19ef35(0x17a)](/<a[^>]*href=["']([^"']*)["'][^>]*>([^<]*)<\/a>/i);if(_0x51945a){const _0x3d7834=_0x51945a[0x1],_0x20c39e=_0x51945a[0x2][_0x19ef35(0x155)]();_0x20c39e&&_0x3d7834!==_0x19ef35(0x167)&&/\.(mkv|mp4|avi|webm)$/i['test'](_0x20c39e)&&_0x5eb3f4['push']({'text':_0x20c39e,'href':_0x3d7834});}}return _0x5eb3f4;}function invokeDahmerMovies(_0x192091,_0xd66db5,_0x494e3e=null,_0x5a3aa2=null){return __async(this,null,function*(){const _0x24af47=_0x496e,_0x1f47e4=_0x192091[_0x24af47(0x166)](/:/g,''),_0x337327=_0x494e3e!==null?[_0x24af47(0x15a)+encodeURIComponent(_0x1f47e4)+_0x24af47(0x15f)+(_0x494e3e<0xa?'0'+_0x494e3e:_0x494e3e)+'/','/tvs/'+encodeURIComponent(_0x1f47e4)+_0x24af47(0x15f)+_0x494e3e+'/']:['/movies/'+encodeURIComponent(_0x1f47e4+'\x20('+_0xd66db5+')')+'/'];let _0x515d71='',_0x664bb5='';for(const _0x132250 of _0x337327){const _0x2bb293=DAHMER_MOVIES_API+_0x132250,_0x397254=yield makeRequest(_0x2bb293);if(_0x397254['ok']){_0x515d71=yield _0x397254[_0x24af47(0x156)](),_0x664bb5=_0x2bb293;break;}}if(!_0x515d71)return[];const _0x11d018=parseLinks(_0x515d71);let _0x777c46=_0x11d018;if(_0x494e3e!==null&&_0x5a3aa2!==null){const _0x1cf256=_0x5a3aa2<0xa?'0'+_0x5a3aa2:_0x5a3aa2,_0x3bbd1a=new RegExp('E'+_0x1cf256+'|E'+_0x5a3aa2,'i');_0x777c46=_0x11d018[_0x24af47(0x16d)](_0x2f6fd5=>_0x3bbd1a['test'](_0x2f6fd5[_0x24af47(0x156)]));}const _0x26a508=_0x777c46['sort']((_0x419f63,_0x31c5b6)=>{const _0x1a5cad=_0x24af47,_0x40fb2c=/2160p|4k/i['test'](_0x419f63[_0x1a5cad(0x156)]),_0x342460=/2160p|4k/i[_0x1a5cad(0x169)](_0x31c5b6[_0x1a5cad(0x156)]);return _0x342460-_0x40fb2c;}),_0x9bc5c9=[];for(const _0x592ff6 of _0x26a508[_0x24af47(0x175)](0x0,0x5)){let _0x280393;if(_0x592ff6['href'][_0x24af47(0x168)]('http'))_0x280393=_0x592ff6[_0x24af47(0x14b)];else _0x592ff6[_0x24af47(0x14b)][_0x24af47(0x149)](_0x24af47(0x17b))||_0x592ff6[_0x24af47(0x14b)][_0x24af47(0x149)](_0x24af47(0x15a))?_0x280393=DAHMER_MOVIES_API+(_0x592ff6[_0x24af47(0x14b)][_0x24af47(0x168)]('/')?'':'/')+_0x592ff6[_0x24af47(0x14b)]:_0x280393=_0x664bb5+_0x592ff6['href'];_0x280393=_0x280393[_0x24af47(0x166)](/([^:]\/)\/+/g,'$1');const _0x46f628=yield resolveFinalUrl(_0x280393);_0x9bc5c9[_0x24af47(0x162)]({'name':_0x24af47(0x146),'title':_0x592ff6['text'],'url':_0x46f628,'quality':/2160p|4k/i[_0x24af47(0x169)](_0x592ff6['text'])?_0x24af47(0x17c):_0x24af47(0x147),'headers':{'User-Agent':_0x24af47(0x174),'Referer':DAHMER_MOVIES_API+'/','Range':_0x24af47(0x150)},'provider':_0x24af47(0x178)});}return _0x9bc5c9;});}function _0x496e(_0x50604e,_0xc1f6bb){_0x50604e=_0x50604e-0x144;const _0x39aa64=_0x39aa();let _0x496e7c=_0x39aa64[_0x50604e];if(_0x496e['DVuJgC']===undefined){var _0x5d39d7=function(_0x3663ff){const _0x1a3d11='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';let _0x3b000f='',_0x6b952b='';for(let _0x285023=0x0,_0x4983ee,_0xc561fb,_0x51942c=0x0;_0xc561fb=_0x3663ff['charAt'](_0x51942c++);~_0xc561fb&&(_0x4983ee=_0x285023%0x4?_0x4983ee*0x40+_0xc561fb:_0xc561fb,_0x285023++%0x4)?_0x3b000f+=String['fromCharCode'](0xff&_0x4983ee>>(-0x2*_0x285023&0x6)):0x0){_0xc561fb=_0x1a3d11['indexOf'](_0xc561fb);}for(let _0x18eb73=0x0,_0x2ad414=_0x3b000f['length'];_0x18eb73<_0x2ad414;_0x18eb73++){_0x6b952b+='%'+('00'+_0x3b000f['charCodeAt'](_0x18eb73)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x6b952b);};_0x496e['ModTYJ']=_0x5d39d7,_0x496e['OzmMUG']={},_0x496e['DVuJgC']=!![];}const _0x561694=_0x39aa64[0x0],_0x25d3ae=_0x50604e+_0x561694,_0x344d51=_0x496e['OzmMUG'][_0x25d3ae];return!_0x344d51?(_0x496e7c=_0x496e['ModTYJ'](_0x496e7c),_0x496e['OzmMUG'][_0x25d3ae]=_0x496e7c):_0x496e7c=_0x344d51,_0x496e7c;}function getStreams(_0x1e74c7,_0x4e7a14='movie',_0x479f09=null,_0x21c0c7=null){return __async(this,null,function*(){const _0x46a367=_0x496e;var _0x2ae1e9;try{const _0x2ce8eb=_0x4e7a14==='tv'?'tv':_0x46a367(0x172),_0x10adb0='https://api.themoviedb.org/3/'+_0x2ce8eb+'/'+_0x1e74c7+_0x46a367(0x16b)+TMDB_API_KEY,_0x55b796=yield makeRequest(_0x10adb0),_0x1fc166=yield _0x55b796[_0x46a367(0x14f)](),_0x4720c9=_0x4e7a14==='tv'?_0x1fc166['name']:_0x1fc166[_0x46a367(0x173)],_0x5989ac=(_0x2ae1e9=_0x4e7a14==='tv'?_0x1fc166[_0x46a367(0x157)]:_0x1fc166['release_date'])==null?void 0x0:_0x2ae1e9[_0x46a367(0x160)](0x0,0x4);if(!_0x4720c9)return[];return yield invokeDahmerMovies(_0x4720c9,_0x5989ac,_0x479f09,_0x21c0c7);}catch(_0x3e51b0){return[];}});}function _0x39aa(){const _0x5200e5=['Bwf0y2G','l21VDMLLCY8','mJe2mha','mtr5rhfHrhC','ndq4nJy4yKDNu1vt','rgfOBwvYtw92AwvZ','mta4mha','mti0nZu2me5izLDcAa','Aw5JBhvKzxm','zg9Uzq','AhjLzG','sevbra','Bg9N','ndm5yZq3oge3nZfMmZvJmduWmJjMowzLywjJy2eWmwm','ANnVBG','yNL0zxm9mc0','nJbtEgv2zuq','phrYw14+xsO+kc4QpYK8xc90CJ4','DMfSDwu','l2j1BgS/Dt0','DhjPBq','Dgv4Da','zMLYC3rFywLYx2rHDgu','DgHYB3C','ntuZntiYDNLoyvLm','l3r2CY8','DgHLBG','DxjS','w0rHAg1LCK1VDMLLC10Gsw5PDgLHBgL6Aw5NifnJCMfWzxi','zM9SBg93','l1nLyxnVBIuYma','C3vIC3rYAw5N','z2v0u3rYzwfTCW','ChvZAa','tw96AwXSys81lJaGkfDPBMrVD3mGtLqGmtaUmdSGv2LUnJq7ihG2ncKGqxbWBgvxzwjlAxqVntm3lJm2','mty0mJrwvNjHtwK','Ahr0Chm6lY9HlJeXmtq3nY54ExO','CMvWBgfJzq','lI4V','C3rHCNrZv2L0Aa','DgvZDa','zxHLyW','p2fWAv9RzxK9','Dw5KzwzPBMvK','zMLSDgvY','C3bSAxq','BMv4Da','odyYoty1mhHQvxvqCa','yxbWBhK','Bw92Awu','DgL0Bgu','tw96AwXSys81lJaGkefUzhjVAwqPiev4B1bSyxLLCG','C2XPy2u','mtu1otG5ru1fuwDR','oty1mtG0u3zfCMXK','zgfOBwvYBw92AwvZ','zxHWB3j0CW'];_0x39aa=function(){return _0x5200e5;};return _0x39aa();}if(typeof module!==_0x2d04b7(0x16c))module[_0x2d04b7(0x179)]={'getStreams':getStreams};else global[_0x2d04b7(0x161)]=getStreams;
-// --- 4K ONLY WRAPPER (STRICTLY NO 1080P/720P/480P) ---
+// --- AIOSTREAMS RICH CARD 4K-ONLY WRAPPER WITH EXOPLAYER HEADERS ---
 if (typeof getStreams === 'function') {
   const __origGetStreams = getStreams;
   getStreams = async function(...args) {
@@ -7,19 +7,60 @@ if (typeof getStreams === 'function') {
       const results = await __origGetStreams(...args);
       if (!Array.isArray(results)) return [];
       
-      return results.filter(s => {
-        const q = (s.quality || '').toString().toUpperCase();
-        const str = ((s.name || '') + ' ' + (s.title || '') + ' ' + (s.qualityTag || '')).toUpperCase();
+      const cleaned = results.map(s => {
+        let q = (s.quality || '').toString().toUpperCase();
+        const rawText = ((s.name || '') + ' ' + (s.title || '') + ' ' + (s.qualityTag || '') + ' ' + (s.url || '')).toUpperCase();
         
-        // Strictly eliminate 1080p, 720p, 480p, SD, or lower resolutions
-        if (q === '1080P' || q === '720P' || q === '480P' || /\b(1080P|720P|480P|360P|240P|1080|720|480)\b/.test(str)) {
-          return false;
-        }
+        const is2160 = q === '4K' || q === '2160P' || rawText.includes('2160P') || /\b(4K|2160)\b/.test(rawText);
+        if (!is2160) return null;
         
-        // Keep ONLY 4K (2160p) streams
-        const is2160 = q === '4K' || q === '2160P' || str.includes('2160P') || /\b(4K|2160)\b/.test(str);
-        return is2160;
-      });
+        const reqHeaders = (s.behaviorHints && s.behaviorHints.proxyHeaders && s.behaviorHints.proxyHeaders.request) ? s.behaviorHints.proxyHeaders.request : (s.headers || {});
+        const finalHeaders = { 'User-Agent': 'Mozilla/5.0 (Android) ExoPlayer', 'Range': 'bytes=0-', ...reqHeaders };
+        
+        let sizeStr = (s.size || '').toString();
+        const sizeMatch = rawText.match(/(\d+(?:\.\d+)?\s*(?:GB|MB))/i) || sizeStr.match(/(\d+(?:\.\d+)?\s*(?:GB|MB))/i);
+        if (sizeMatch) sizeStr = sizeMatch[1];
+        else sizeStr = sizeStr || '4K UHD';
+        
+        let badge = '4K (WEB)\n⟨Remux⟩';
+        if (rawText.includes('BLURAY')) badge = '4K (BluRay)\n⟨Remux⟩';
+        else if (rawText.includes('HDRIP') || rawText.includes('WEB')) badge = '4K (WEB)\n★★★★★';
+        
+        let videoSpecs = [];
+        if (rawText.includes('HEVC') || rawText.includes('X265')) videoSpecs.push('HEVC');
+        if (rawText.includes('10BIT')) videoSpecs.push('10bit');
+        if (rawText.includes('DV') || rawText.includes('DOLBY VISION')) videoSpecs.push('DV');
+        if (rawText.includes('HDR')) videoSpecs.push('HDR');
+        if (videoSpecs.length === 0) videoSpecs = ['HEVC', '10bit', 'HDR'];
+        
+        let audioSpecs = [];
+        if (rawText.includes('ATMOS')) audioSpecs.push('Atmos');
+        if (rawText.includes('DD+') || rawText.includes('DDP')) audioSpecs.push('DD+');
+        if (rawText.includes('TRUEHD')) audioSpecs.push('TrueHD');
+        if (rawText.includes('DTS')) audioSpecs.push('DTS-HD');
+        if (rawText.includes('7.1')) audioSpecs.push('🔊 7.1');
+        else if (rawText.includes('5.1')) audioSpecs.push('🔊 5.1');
+        else audioSpecs.push('🔊 2.0');
+        if (audioSpecs.length === 1) audioSpecs.unshift('Dual Audio');
+        
+        let langStr = 'HI · EN';
+        if (rawText.includes('MULTI')) langStr = 'MULTI';
+        
+        let cleanTitle = (s.title || '').split('\n')[0].replace(/^🎬\s*/, '').replace(/\s*\n.*$/, '').trim() || (s.name || 'Stream');
+        const formattedTitle = '✏  ' + cleanTitle + '\n⏹  ' + videoSpecs.join(' ✦ ') + '\n🎵  ' + audioSpecs.join(' · ') + '\n◈  ' + sizeStr + '\n🛡  Nuvio · DahmerMovies\n🏴  ' + langStr;
+        
+        return {
+          name: badge,
+          title: formattedTitle,
+          url: s.url,
+          quality: '4K',
+          size: sizeStr,
+          headers: finalHeaders,
+          provider: 'dahmermovies-4k'
+        };
+      }).filter(s => s !== null && s.quality === '4K');
+      
+      return cleaned;
     } catch (e) {
       return [];
     }

@@ -166,52 +166,6 @@
       ]
     },
     {
-      "id": "xdmovies",
-      "name": "🎥 XDMovies 4K & 1080p",
-      "description": "XDMovies streaming filtered for 4K & 1080p resolution (NO 720p)",
-      "version": "1.0.0",
-      "author": "Nuvio 4K & 1080p Team",
-      "supportedTypes": [
-        "movie",
-        "tv"
-      ],
-      "filename": "providers/xdmovies.js",
-      "enabled": true,
-      "hasSettings": true,
-      "formats": [
-        "mp4",
-        "mkv"
-      ],
-      "logo": "https://i.postimg.cc/Z5B7RF79/4khdhub.png",
-      "contentLanguage": [
-        "en",
-        "hi"
-      ]
-    },
-    {
-      "id": "psa",
-      "name": "🎞️ PSArips 4K & 1080p",
-      "description": "PSArips x265 HEVC releases filtered for 4K & 1080p resolution (NO 720p)",
-      "version": "1.0.0",
-      "author": "Nuvio 4K & 1080p Team",
-      "supportedTypes": [
-        "movie",
-        "tv"
-      ],
-      "filename": "providers/psa.js",
-      "enabled": true,
-      "hasSettings": true,
-      "formats": [
-        "mp4",
-        "mkv"
-      ],
-      "logo": "https://i.postimg.cc/Z5B7RF79/4khdhub.png",
-      "contentLanguage": [
-        "en",
-        "hi"
-      ]
-    },
-    {
       "id": "dahmermovies-4k",
       "name": "🎬 Dahmermovies 4K & 1080p",
       "description": "Dahmermovies streaming filtered for 4K & 1080p resolution (NO 720p)",

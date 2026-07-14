@@ -1,43 +1,20 @@
 {
   "name": "4K Only Nuvio Scrapers",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "Curated repository of strictly 4K (2160p) UHD/BluRay scrapers for Nuvio. Zero 1080p, 720p, or SD streams.",
   "author": "Nuvio 4K & 1080p Team",
   "scrapers": [
     {
-      "id": "olamovies",
-      "name": "👑 OlaMovies 4K Only",
-      "description": "Highest Quality 4K UHD & 1080p BluRay REMUX Movies and TV Series from OlaMovies",
-      "version": "3.0.0",
+      "id": "dahmermovies-4k",
+      "name": "🎬 Dahmermovies 4K Only",
+      "description": "Dahmermovies streaming filtered for 4K & 1080p resolution (NO 720p)",
+      "version": "4.0.0",
       "author": "Nuvio 4K & 1080p Team",
       "supportedTypes": [
         "movie",
         "tv"
       ],
-      "filename": "providers/olamovies.js",
-      "enabled": true,
-      "hasSettings": true,
-      "formats": [
-        "mp4",
-        "mkv"
-      ],
-      "logo": "https://i.postimg.cc/Z5B7RF79/4khdhub.png",
-      "contentLanguage": [
-        "en",
-        "hi"
-      ]
-    },
-    {
-      "id": "uhdmovies",
-      "name": "🌟 UHDMovies 4K Only",
-      "description": "UHD Movies streaming filtered for 4K & 1080p resolution (NO 720p)",
-      "version": "3.0.0",
-      "author": "Nuvio 4K & 1080p Team",
-      "supportedTypes": [
-        "movie",
-        "tv"
-      ],
-      "filename": "providers/uhdmovies.js",
+      "filename": "providers/dahmermovies-4k.js",
       "enabled": true,
       "hasSettings": true,
       "formats": [
@@ -54,7 +31,7 @@
       "id": "4khdhub",
       "name": "⚡ 4KHDHub 4K Only",
       "description": "4KHDHub direct links filtered for 4K & 1080p resolution (NO 720p)",
-      "version": "3.0.0",
+      "version": "4.0.0",
       "author": "Nuvio 4K & 1080p Team",
       "supportedTypes": [
         "movie",
@@ -77,174 +54,13 @@
       "id": "4khdhubnew",
       "name": "⚡ 4KHDHub-NEW 4K Only",
       "description": "4KHDHub New scraper filtered for 4K & 1080p resolution (NO 720p)",
-      "version": "3.0.0",
+      "version": "4.0.0",
       "author": "Nuvio 4K & 1080p Team",
       "supportedTypes": [
         "movie",
         "tv"
       ],
       "filename": "providers/4khdhubnew.js",
-      "enabled": true,
-      "hasSettings": true,
-      "formats": [
-        "mp4",
-        "mkv"
-      ],
-      "logo": "https://i.postimg.cc/Z5B7RF79/4khdhub.png",
-      "contentLanguage": [
-        "en",
-        "hi"
-      ]
-    },
-    {
-      "id": "vegamovies",
-      "name": "☄️ VegaMovies 4K Only",
-      "description": "VegaMovies streaming filtered for 4K & 1080p resolution (Strictly NO 720p/480p)",
-      "version": "3.0.0",
-      "author": "Nuvio 4K & 1080p Team",
-      "supportedTypes": [
-        "movie",
-        "tv"
-      ],
-      "filename": "providers/vegamovies.js",
-      "enabled": true,
-      "hasSettings": true,
-      "formats": [
-        "mp4",
-        "mkv"
-      ],
-      "logo": "https://i.postimg.cc/13ZtY5x0/vegamovies.png",
-      "contentLanguage": [
-        "en",
-        "hi"
-      ]
-    },
-    {
-      "id": "ddlbase",
-      "name": "📦 DDLBase 4K Only",
-      "description": "DDLBase direct downloads filtered for 4K & 1080p resolution (Strictly NO 720p/480p)",
-      "version": "3.0.0",
-      "author": "Nuvio 4K & 1080p Team",
-      "supportedTypes": [
-        "movie",
-        "tv"
-      ],
-      "filename": "providers/ddlbase.js",
-      "enabled": true,
-      "hasSettings": true,
-      "formats": [
-        "mp4",
-        "mkv"
-      ],
-      "logo": "https://i.postimg.cc/Y0gRQX4V/ddlbase.png",
-      "contentLanguage": [
-        "en",
-        "hi"
-      ]
-    },
-    {
-      "id": "dahmermovies-4k",
-      "name": "🎬 Dahmermovies 4K Only",
-      "description": "Dahmermovies streaming filtered for 4K & 1080p resolution (NO 720p)",
-      "version": "3.0.0",
-      "author": "Nuvio 4K & 1080p Team",
-      "supportedTypes": [
-        "movie",
-        "tv"
-      ],
-      "filename": "providers/dahmermovies-4k.js",
-      "enabled": true,
-      "hasSettings": true,
-      "formats": [
-        "mp4",
-        "mkv"
-      ],
-      "logo": "https://i.postimg.cc/Z5B7RF79/4khdhub.png",
-      "contentLanguage": [
-        "en",
-        "hi"
-      ]
-    },
-    {
-      "id": "moviesdrive",
-      "name": "🚀 MoviesDrive 4K Only",
-      "description": "MoviesDrive streaming filtered for 4K & 1080p resolution (NO 720p)",
-      "version": "3.0.0",
-      "author": "Nuvio 4K & 1080p Team",
-      "supportedTypes": [
-        "movie",
-        "tv"
-      ],
-      "filename": "providers/moviesdrive.js",
-      "enabled": true,
-      "hasSettings": true,
-      "formats": [
-        "mp4",
-        "mkv"
-      ],
-      "logo": "https://i.postimg.cc/Z5B7RF79/4khdhub.png",
-      "contentLanguage": [
-        "en",
-        "hi"
-      ]
-    },
-    {
-      "id": "hindmoviez",
-      "name": "💎 HindMoviez 4K Only",
-      "description": "HindMoviez streaming filtered for 4K & 1080p resolution (NO 720p)",
-      "version": "3.0.0",
-      "author": "Nuvio 4K & 1080p Team",
-      "supportedTypes": [
-        "movie",
-        "tv"
-      ],
-      "filename": "providers/hindmoviez.js",
-      "enabled": true,
-      "hasSettings": true,
-      "formats": [
-        "mp4",
-        "mkv"
-      ],
-      "logo": "https://i.postimg.cc/Z5B7RF79/4khdhub.png",
-      "contentLanguage": [
-        "en",
-        "hi"
-      ]
-    },
-    {
-      "id": "cineby",
-      "name": "🎥 Cineby 4K Only",
-      "description": "Cineby streaming filtered for 4K & 1080p resolution (NO 720p)",
-      "version": "3.0.0",
-      "author": "Nuvio 4K & 1080p Team",
-      "supportedTypes": [
-        "movie",
-        "tv"
-      ],
-      "filename": "providers/cineby.js",
-      "enabled": true,
-      "hasSettings": true,
-      "formats": [
-        "mp4",
-        "mkv"
-      ],
-      "logo": "https://i.postimg.cc/Z5B7RF79/4khdhub.png",
-      "contentLanguage": [
-        "en",
-        "hi"
-      ]
-    },
-    {
-      "id": "nakios",
-      "name": "🇫🇷 Nakios 4K Only",
-      "description": "French & English streaming filtered for 4K & 1080p resolution (NO 720p)",
-      "version": "3.0.0",
-      "author": "Nuvio 4K & 1080p Team",
-      "supportedTypes": [
-        "movie",
-        "tv"
-      ],
-      "filename": "providers/nakios.js",
       "enabled": true,
       "hasSettings": true,
       "formats": [

@@ -565,12 +565,29 @@ async function getStreams(id, type = 'movie', season = null, episode = null) {
   }
 }
 
-// --- AIOSTREAMS RICH CARD 4K-ONLY WRAPPER WITH EXOPLAYER HEADERS ---
+// --- AIOSTREAMS RICH CARD 4K-ONLY WRAPPER WITH EXOPLAYER HEADERS & IMDB-TO-TMDB BRIDGE ---
 if (typeof getStreams === 'function') {
   const __origGetStreams = getStreams;
   getStreams = async function(...args) {
     try {
-      const results = await __origGetStreams(...args);
+      let [id, type, season, episode, ...rest] = args;
+      let cleanId = id;
+      if (typeof cleanId === 'string' && cleanId.includes(':')) {
+        const parts = cleanId.split(':');
+        cleanId = parts[0];
+        if (parts[1] && season == null) season = parseInt(parts[1], 10);
+        if (parts[2] && episode == null) episode = parseInt(parts[2], 10);
+      }
+      if ((type === 'tv' || type === 'series') && typeof cleanId === 'string' && cleanId.startsWith('tt')) {
+        try {
+          const res = await fetch('https://api.themoviedb.org/3/find/' + cleanId + '?api_key=1865f43a0549ca50d341dd9ab8b29f49&external_source=imdb_id');
+          const json = await res.json();
+          if (json && json.tv_results && json.tv_results.length > 0) {
+            cleanId = json.tv_results[0].id.toString();
+          }
+        } catch (err) {}
+      }
+      const results = await __origGetStreams(cleanId, type, season, episode, ...rest);
       if (!Array.isArray(results)) return [];
       
       // Step 1: Strict 4K filter before modifying stream objects

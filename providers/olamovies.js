@@ -185,66 +185,55 @@ if (typeof module !== 'undefined' && module.exports) {
   global.getStreams = getStreams;
 }
 
-// --- AIOSTREAMS RICH CARD 4K-ONLY WRAPPER WITH EXOPLAYER HEADERS & IMDB-TO-TMDB BRIDGE ---
+// --- 4K ONLY WRAPPER (STRICTLY NO 1080P/720P/480P) ---
 if (typeof getStreams === 'function') {
   const __origGetStreams = getStreams;
   getStreams = async function(...args) {
     try {
-      let [id, type, season, episode, ...rest] = args;
-      let cleanId = id;
-      if (typeof cleanId === 'string' && cleanId.includes(':')) {
-        const parts = cleanId.split(':');
-        cleanId = parts[0];
-        if (parts[1] && season == null) season = parseInt(parts[1], 10);
-        if (parts[2] && episode == null) episode = parseInt(parts[2], 10);
-      }
-      if ((type === 'tv' || type === 'series') && typeof cleanId === 'string' && cleanId.startsWith('tt')) {
+      let runArgs = args;
+      // Only for OlaMovies and Cineby when given an IMDB string (tt...), safely attempt resolution without blocking fallback
+      if (('olamovies' === 'olamovies' || 'olamovies' === 'cineby') && args.length > 0 && typeof args[0] === 'string' && args[0].startsWith('tt')) {
         try {
-          const res = await fetch('https://api.themoviedb.org/3/find/' + cleanId + '?api_key=1865f43a0549ca50d341dd9ab8b29f49&external_source=imdb_id');
-          const json = await res.json();
-          if (json && json.tv_results && json.tv_results.length > 0) {
-            cleanId = json.tv_results[0].id.toString();
+          let cleanId = args[0];
+          let season = args[2];
+          let episode = args[3];
+          if (cleanId.includes(':')) {
+            const parts = cleanId.split(':');
+            cleanId = parts[0];
+            if (parts[1] && season == null) season = parseInt(parts[1], 10);
+            if (parts[2] && episode == null) episode = parseInt(parts[2], 10);
+          }
+          const type = args[1] || 'movie';
+          if (type === 'tv' || type === 'series') {
+            const res = await fetch('https://api.themoviedb.org/3/find/' + cleanId + '?api_key=1865f43a0549ca50d341dd9ab8b29f49&external_source=imdb_id');
+            const json = await res.json();
+            if (json && json.tv_results && json.tv_results.length > 0) {
+              const newArgs = [...args];
+              newArgs[0] = json.tv_results[0].id.toString();
+              if (season != null) newArgs[2] = season;
+              if (episode != null) newArgs[3] = episode;
+              runArgs = newArgs;
+            }
           }
         } catch (err) {}
       }
-      const results = await __origGetStreams(cleanId, type, season, episode, ...rest);
+      
+      const results = await __origGetStreams(...runArgs);
       if (!Array.isArray(results)) return [];
       
-      // Step 1: Strict 4K filter before modifying stream objects
-      const filtered = results.filter(s => {
+      return results.filter(s => {
         if (!s || !s.url) return false;
         const q = (s.quality || s.resolution || '').toString().toUpperCase();
-        const titleStr = (s.title || s.name || s.description || '').toString().toUpperCase();
-        const combined = (q + ' ' + titleStr).toUpperCase();
+        const str = ((s.name || '') + ' ' + (s.title || '') + ' ' + (s.qualityTag || '')).toUpperCase();
         
-        // Strict rejection of any 1080p, 720p, 480p, FHD, or HD tags
-        if (q === '1080P' || q === '720P' || q === '480P' || q === '1080' || q === '720' || q === '480' || q === 'FHD' || q === 'HD') {
-          return false;
-        }
-        if (/\b(1080P?|720P?|480P?|360P?|FHD)\b/i.test(combined)) {
+        // Strictly eliminate 1080p, 720p, 480p, SD, or lower resolutions
+        if (q === '1080P' || q === '720P' || q === '480P' || q === '1080' || q === '720' || q === '480' || /(1080P|720P|480P|360P|240P|1080|720|480|FHD)/.test(str)) {
           return false;
         }
         
-        // Explicit verification of 2160p, 4K, or UHD inside resolution/title field
-        const has2160 = q === '4K' || q === '2160P' || q === '2160' || q === 'UHD' || /\b(2160P?|UHD|4K\s*(?:UHD|REMUX|BLURAY|WEB|UDR|HDR|HEVC|X265))\b/i.test(combined);
-        return has2160;
-      });
-      
-      // Step 2: Clean mapping preserving website name (s.name) and native stream title
-      return filtered.map(s => {
-        const reqHeaders = (s.behaviorHints && s.behaviorHints.proxyHints && s.behaviorHints.proxyHints.request) ? s.behaviorHints.proxyHints.request : (s.headers || {});
-        const finalHeaders = { 'User-Agent': 'Mozilla/5.0 (Android) ExoPlayer', 'Range': 'bytes=0-', ...reqHeaders };
-        
-        let qVal = (s.quality || '2160p').toString();
-        if (qVal.toUpperCase() !== '4K' && qVal.toUpperCase() !== '2160P') qVal = '2160p';
-        
-        return {
-          ...s,
-          name: s.name || 'OlaMovies',
-          title: s.title || 'OlaMovies 4K UHD Stream',
-          quality: qVal,
-          headers: finalHeaders
-        };
+        // Keep ONLY 4K (2160p) streams
+        const is2160 = q === '4K' || q === '2160P' || q === '2160' || q === 'UHD' || str.includes('2160P') || /(4K|2160|UHD|REMUX)/.test(str);
+        return is2160;
       });
     } catch (e) {
       return [];

@@ -98,8 +98,8 @@
     },
     {
       "id": "hdhub4u",
-      "name": "🔥 HDHub4u 4K & 1080p",
-      "description": "HDHub4u streaming filtered for 4K & 1080p resolution (NO 720p)",
+      "name": "🔥 HDHub4u 4K Only",
+      "description": "HDHub4u streaming filtered strictly for 4K (2160p) resolution only",
       "version": "1.0.0",
       "author": "Nuvio 4K & 1080p Team",
       "supportedTypes": [

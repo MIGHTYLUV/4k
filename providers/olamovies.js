@@ -185,34 +185,57 @@ if (typeof module !== 'undefined' && module.exports) {
   global.getStreams = getStreams;
 }
 
-// --- 4K ONLY WRAPPER (STRICTLY NO 1080P/720P/480P) ---
+// --- 4K ONLY WRAPPER WITH UNIVERSAL ID/TITLE BRIDGE (STRICTLY NO 1080P/720P/480P) ---
 if (typeof getStreams === 'function') {
   const __origGetStreams = getStreams;
   getStreams = async function(...args) {
     try {
-      let runArgs = args;
-      // Only for OlaMovies and Cineby when given an IMDB string (tt...), safely attempt resolution without blocking fallback
-      if (('olamovies' === 'olamovies' || 'olamovies' === 'cineby') && args.length > 0 && typeof args[0] === 'string' && args[0].startsWith('tt')) {
+      let runArgs = [...args];
+      // Safely unpack ID if passed as object from Nuvio sandbox
+      if (runArgs.length > 0 && runArgs[0] && typeof runArgs[0] === 'object') {
+        const obj = runArgs[0];
+        runArgs[0] = obj.id || obj.imdb_id || obj.tmdb_id || obj.title || obj.query || runArgs[0];
+        if (obj.type && !runArgs[1]) runArgs[1] = obj.type;
+        if (obj.season && !runArgs[2]) runArgs[2] = obj.season;
+        if (obj.episode && !runArgs[3]) runArgs[3] = obj.episode;
+      }
+      
+      // For providers requiring specific TMDB/IMDB IDs when given a title or compound ID
+      if (args.length > 0 && typeof runArgs[0] === 'string') {
         try {
-          let cleanId = args[0];
-          let season = args[2];
-          let episode = args[3];
-          if (cleanId.includes(':')) {
-            const parts = cleanId.split(':');
-            cleanId = parts[0];
+          let rawId = runArgs[0].trim();
+          let season = runArgs[2];
+          let episode = runArgs[3];
+          if (rawId.includes(':')) {
+            const parts = rawId.split(':');
+            rawId = parts[0];
             if (parts[1] && season == null) season = parseInt(parts[1], 10);
             if (parts[2] && episode == null) episode = parseInt(parts[2], 10);
           }
-          const type = args[1] || 'movie';
-          if (type === 'tv' || type === 'series') {
-            const res = await fetch('https://api.themoviedb.org/3/find/' + cleanId + '?api_key=1865f43a0549ca50d341dd9ab8b29f49&external_source=imdb_id');
+          const type = runArgs[1] || 'movie';
+          const mediaType = (type === 'tv' || type === 'series') ? 'tv' : 'movie';
+          
+          // If OlaMovies or Cineby are given an IMDB ID (tt...), resolve to TMDB integer ID
+          if (('olamovies' === 'olamovies' || 'olamovies' === 'cineby') && rawId.startsWith('tt')) {
+            const res = await fetch('https://api.themoviedb.org/3/find/' + rawId + '?api_key=1865f43a0549ca50d341dd9ab8b29f49&external_source=imdb_id');
             const json = await res.json();
-            if (json && json.tv_results && json.tv_results.length > 0) {
-              const newArgs = [...args];
-              newArgs[0] = json.tv_results[0].id.toString();
-              if (season != null) newArgs[2] = season;
-              if (episode != null) newArgs[3] = episode;
-              runArgs = newArgs;
+            if (json && json.movie_results && json.movie_results.length > 0 && mediaType === 'movie') {
+              runArgs[0] = json.movie_results[0].id.toString();
+            } else if (json && json.tv_results && json.tv_results.length > 0 && mediaType === 'tv') {
+              runArgs[0] = json.tv_results[0].id.toString();
+              if (season != null) runArgs[2] = season;
+              if (episode != null) runArgs[3] = episode;
+            }
+          }
+          // If given a plain text string title instead of an ID, resolve via TMDB search
+          else if (!rawId.startsWith('tt') && !/^\d+$/.test(rawId)) {
+            const res = await fetch('https://api.themoviedb.org/3/search/' + mediaType + '?api_key=1865f43a0549ca50d341dd9ab8b29f49&query=' + encodeURIComponent(rawId));
+            const json = await res.json();
+            if (json && json.results && json.results.length > 0) {
+              const matchedId = json.results[0].id.toString();
+              if ('olamovies' === 'olamovies' || 'olamovies' === 'cineby') {
+                runArgs[0] = matchedId;
+              }
             }
           }
         } catch (err) {}
@@ -227,12 +250,12 @@ if (typeof getStreams === 'function') {
         const str = ((s.name || '') + ' ' + (s.title || '') + ' ' + (s.qualityTag || '')).toUpperCase();
         
         // Strictly eliminate 1080p, 720p, 480p, SD, or lower resolutions
-        if (q === '1080P' || q === '720P' || q === '480P' || q === '1080' || q === '720' || q === '480' || /(1080P|720P|480P|360P|240P|1080|720|480|FHD)/.test(str)) {
+        if (q === '1080P' || q === '720P' || q === '480P' || q === '1080' || q === '720' || q === '480' || /\b(1080P|720P|480P|360P|240P|1080|720|480|FHD)\b/.test(str)) {
           return false;
         }
         
         // Keep ONLY 4K (2160p) streams
-        const is2160 = q === '4K' || q === '2160P' || q === '2160' || q === 'UHD' || str.includes('2160P') || /(4K|2160|UHD|REMUX)/.test(str);
+        const is2160 = q === '4K' || q === '2160P' || q === '2160' || q === 'UHD' || str.includes('2160P') || /\b(4K|2160|UHD|REMUX)\b/.test(str);
         return is2160;
       });
     } catch (e) {

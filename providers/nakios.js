@@ -8,14 +8,30 @@ if (typeof getStreams === 'function') {
       const results = await __origGetStreams(...args);
       if (!Array.isArray(results)) return [];
       
-      const cleaned = results.map(s => {
-        let q = (s.quality || '').toString().toUpperCase();
-        const rawText = ((s.name || '') + ' ' + (s.title || '') + ' ' + (s.qualityTag || '') + ' ' + (s.url || '')).toUpperCase();
+      // Step 1: Strict 4K filter before modifying stream objects
+      const filtered = results.filter(s => {
+        if (!s) return false;
+        const q = (s.quality || s.resolution || '').toString().toUpperCase();
+        const titleStr = (s.title || s.name || s.description || '').toString().toUpperCase();
+        const combined = (q + ' ' + titleStr).toUpperCase();
         
-        const is2160 = q === '4K' || q === '2160P' || rawText.includes('2160P') || /\b(4K|2160)\b/.test(rawText);
-        if (!is2160) return null;
+        // Strict rejection of any 1080p, 720p, 480p, FHD, or HD tags
+        if (q === '1080P' || q === '720P' || q === '480P' || q === '1080' || q === '720' || q === '480' || q === 'FHD' || q === 'HD') {
+          return false;
+        }
+        if (/\b(1080P?|720P?|480P?|360P?|FHD)\b/i.test(combined)) {
+          return false;
+        }
         
-        const reqHeaders = (s.behaviorHints && s.behaviorHints.proxyHeaders && s.behaviorHints.proxyHeaders.request) ? s.behaviorHints.proxyHeaders.request : (s.headers || {});
+        // Explicit verification of 2160p, 4K, or UHD inside resolution/title field
+        const has2160 = q === '4K' || q === '2160P' || q === '2160' || q === 'UHD' || /\b(2160P?|UHD|4K\s*(?:UHD|REMUX|BLURAY|WEB|UDR|HDR|HEVC|X265))\b/i.test(combined);
+        return has2160;
+      });
+      
+      // Step 2: Map filtered 4K streams to rich AIOStreams layout with ExoPlayer headers
+      return filtered.map(s => {
+        const rawText = ((s.name || '') + ' ' + (s.title || '') + ' ' + (s.qualityTag || '')).toUpperCase();
+        const reqHeaders = (s.behaviorHints && s.behaviorHints.proxyHints && s.behaviorHints.proxyHints.request) ? s.behaviorHints.proxyHints.request : (s.headers || {});
         const finalHeaders = { 'User-Agent': 'Mozilla/5.0 (Android) ExoPlayer', 'Range': 'bytes=0-', ...reqHeaders };
         
         let sizeStr = (s.size || '').toString();
@@ -59,9 +75,7 @@ if (typeof getStreams === 'function') {
           headers: finalHeaders,
           provider: 'nakios'
         };
-      }).filter(s => s !== null && s.quality === '4K');
-      
-      return cleaned;
+      });
     } catch (e) {
       return [];
     }

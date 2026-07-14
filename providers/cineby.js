@@ -27,7 +27,7 @@ if (typeof getStreams === 'function') {
       
       // Step 1: Strict 4K filter before modifying stream objects
       const filtered = results.filter(s => {
-        if (!s) return false;
+        if (!s || !s.url) return false;
         const q = (s.quality || s.resolution || '').toString().toUpperCase();
         const titleStr = (s.title || s.name || s.description || '').toString().toUpperCase();
         const combined = (q + ' ' + titleStr).toUpperCase();
@@ -45,52 +45,20 @@ if (typeof getStreams === 'function') {
         return has2160;
       });
       
-      // Step 2: Map filtered 4K streams to rich AIOStreams layout with ExoPlayer headers
+      // Step 2: Clean mapping preserving website name (s.name) and native stream title
       return filtered.map(s => {
-        const rawText = ((s.name || '') + ' ' + (s.title || '') + ' ' + (s.qualityTag || '')).toUpperCase();
         const reqHeaders = (s.behaviorHints && s.behaviorHints.proxyHints && s.behaviorHints.proxyHints.request) ? s.behaviorHints.proxyHints.request : (s.headers || {});
         const finalHeaders = { 'User-Agent': 'Mozilla/5.0 (Android) ExoPlayer', 'Range': 'bytes=0-', ...reqHeaders };
         
-        let sizeStr = (s.size || '').toString();
-        const sizeMatch = rawText.match(/(\d+(?:\.\d+)?\s*(?:GB|MB))/i) || sizeStr.match(/(\d+(?:\.\d+)?\s*(?:GB|MB))/i);
-        if (sizeMatch) sizeStr = sizeMatch[1];
-        else sizeStr = sizeStr || '4K UHD';
-        
-        let badge = '4K (WEB)\n⟨Remux⟩';
-        if (rawText.includes('BLURAY')) badge = '4K (BluRay)\n⟨Remux⟩';
-        else if (rawText.includes('HDRIP') || rawText.includes('WEB')) badge = '4K (WEB)\n★★★★★';
-        
-        let videoSpecs = [];
-        if (rawText.includes('HEVC') || rawText.includes('X265')) videoSpecs.push('HEVC');
-        if (rawText.includes('10BIT')) videoSpecs.push('10bit');
-        if (rawText.includes('DV') || rawText.includes('DOLBY VISION')) videoSpecs.push('DV');
-        if (rawText.includes('HDR')) videoSpecs.push('HDR');
-        if (videoSpecs.length === 0) videoSpecs = ['HEVC', '10bit', 'HDR'];
-        
-        let audioSpecs = [];
-        if (rawText.includes('ATMOS')) audioSpecs.push('Atmos');
-        if (rawText.includes('DD+') || rawText.includes('DDP')) audioSpecs.push('DD+');
-        if (rawText.includes('TRUEHD')) audioSpecs.push('TrueHD');
-        if (rawText.includes('DTS')) audioSpecs.push('DTS-HD');
-        if (rawText.includes('7.1')) audioSpecs.push('🔊 7.1');
-        else if (rawText.includes('5.1')) audioSpecs.push('🔊 5.1');
-        else audioSpecs.push('🔊 2.0');
-        if (audioSpecs.length === 1) audioSpecs.unshift('Dual Audio');
-        
-        let langStr = 'HI · EN';
-        if (rawText.includes('MULTI')) langStr = 'MULTI';
-        
-        let cleanTitle = (s.title || '').split('\n')[0].replace(/^🎬\s*/, '').replace(/\s*\n.*$/, '').trim() || (s.name || 'Stream');
-        const formattedTitle = '✏  ' + cleanTitle + '\n⏹  ' + videoSpecs.join(' ✦ ') + '\n🎵  ' + audioSpecs.join(' · ') + '\n◈  ' + sizeStr + '\n🛡  Nuvio · Cineby\n🏴  ' + langStr;
+        let qVal = (s.quality || '2160p').toString();
+        if (qVal.toUpperCase() !== '4K' && qVal.toUpperCase() !== '2160P') qVal = '2160p';
         
         return {
-          name: badge,
-          title: formattedTitle,
-          url: s.url,
-          quality: '4K',
-          size: sizeStr,
-          headers: finalHeaders,
-          provider: 'cineby'
+          ...s,
+          name: s.name || 'Cineby',
+          title: s.title || 'Cineby 4K UHD Stream',
+          quality: qVal,
+          headers: finalHeaders
         };
       });
     } catch (e) {
